@@ -1,9 +1,8 @@
-bg {
-    position: fixed; 
-    top: 0; 
-    left: 0; 
-  
-    /* Preserve aspet ratio */
-    min-width: 100%;
-    min-height: 100%;
+.profileImg {
+  max-width: 400px;
+  width: 100%;
+  height: auto;
+  border-radius: 15px;
+  padding: 35px;
+  background-color: rgba(0, 0, 0, 0.308);
 }
