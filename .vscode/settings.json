@@ -1,0 +1,5 @@
+{
+    "tslint.ignoreDefinitionFiles": false,
+    "vsintellicode.features.apiExamplests": "enabled",
+    "angular.suggest.includeCompletionsWithSnippetText": false
+}

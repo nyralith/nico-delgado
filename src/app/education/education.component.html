@@ -1,0 +1,12 @@
+<div class="container">
+    <h1>Educacion</h1>
+    <div *ngFor="let edu of educacion">
+        <ul>
+            <li>
+                <h1>{{edu.titulo}}</h1>
+            </li>
+            <p>La duración del cursado fue de: {{edu.tiempo}}</p>
+            <p>El cursado se realizó en: {{edu.institucion}} en el año {{edu.inicio}}</p>
+        </ul>
+    </div>
+</div>
