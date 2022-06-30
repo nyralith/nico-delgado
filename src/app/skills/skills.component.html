@@ -1,1 +1,10 @@
-<p>skills works!</p>
+<div class="container">
+    <h1>Skills</h1>
+</div>
+
+<div class="container skillCircles">
+    <div *ngFor="let item of habilidades" class="skillStyles">
+        <mat-spinner mode="determinate" value="{{item.valor}}" color="accent" style="margin:0 auto"></mat-spinner>
+        <p>{{item.skill}}</p>
+    </div>
+</div>

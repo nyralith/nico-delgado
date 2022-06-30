@@ -1,1 +1,10 @@
-<p>proyects works!</p>
+<div class="container">
+    <h2>Proyectos</h2>
+
+
+    <div *ngFor="let proyecto of proyectos">
+        <h4>{{proyecto.titulo}}</h4>
+        <p>{{proyecto.descripcion}}</p>
+        <input type="button" value="Ver Proyecto" class="proyectButton">
+    </div>
+</div>
