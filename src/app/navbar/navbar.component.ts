@@ -1,5 +1,7 @@
-import { Component, OnInit } from '@angular/core';
-import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { Component, Inject, OnInit } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
+import { LoginComponent } from '../login/login.component';
+
 
 @Component({
   selector: 'app-navbar',
@@ -7,10 +9,36 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
   styleUrls: ['./navbar.component.css']
 })
 export class NavbarComponent implements OnInit {
+  isLogin: boolean = false;
+  userName: string = 'admin';
+  logPassword: string = 'admin';
 
-  constructor() { }
+  constructor(public dialog: MatDialog) { }
 
   ngOnInit(): void {
   }
   public isMenuCollapsed = true
+
+  openDialog(): void {
+    const dialogRef = this.dialog.open(LoginComponent, {
+      width: '580px',
+      height: '350px'
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      if(result.userName === this.userName && result.password === this.logPassword){
+        this.isLogin = true
+        console.log(result, 'result afterclose navbar')
+        this.onLogin()
+      }
+      
+    })
+  }
+
+  onLogin(){
+    this.isLogin
+
+  }
+
 }
+
