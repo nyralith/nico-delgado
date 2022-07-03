@@ -18,6 +18,11 @@ import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
 import { ReactiveFormsModule } from '@angular/forms';
 import { LoginService } from './services/login.service';
+import { EditComponentComponent } from './edit-component/edit-component.component';
+import { MainPageComponent } from './main-page/main-page.component';
+import {MatCard, MatCardModule} from '@angular/material/card';
+import { HttpClientModule } from '@angular/common/http';
+import { HttpService } from './services/http.service';
 
 @NgModule({
   declarations: [
@@ -28,7 +33,9 @@ import { LoginService } from './services/login.service';
     EducationComponent,
     SkillsComponent,
     ProyectsComponent,
-    LoginComponent
+    LoginComponent,
+    EditComponentComponent,
+    MainPageComponent
   ],
   imports: [
     BrowserModule,
@@ -40,8 +47,10 @@ import { LoginService } from './services/login.service';
     MatInputModule,
     MatButtonModule,
     ReactiveFormsModule,
+    MatCardModule,
+    HttpClientModule
   ],
-  providers: [LoginService],
+  providers: [LoginService, HttpService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

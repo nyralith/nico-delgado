@@ -1,0 +1,7 @@
+{
+    "/api/*":{
+        "target":"https://argentina-programa-api-2.herokuapp.com",
+        "secure": true,
+        "logLevel": "debug"
+    }
+}

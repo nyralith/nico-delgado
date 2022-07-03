@@ -26,19 +26,15 @@ export class NavbarComponent implements OnInit {
     });
 
     dialogRef.afterClosed().subscribe(result => {
-      if(result.userName === this.userName && result.password === this.logPassword){
+      if(result.username === this.userName && result.password === this.logPassword){
         this.isLogin = true
         console.log(result, 'result afterclose navbar')
-        this.onLogin()
       }
       
     })
   }
 
-  onLogin(){
-    this.isLogin
-
-  }
+ 
 
 }
 
