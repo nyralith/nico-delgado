@@ -5,7 +5,6 @@ import { MainPageComponent } from './main-page/main-page.component';
 
 const routes: Routes = [
   { path: '', component: MainPageComponent },
-  { path: 'editar-producto/:id', component: EditComponentComponent },
   { path: '**', redirectTo: '', pathMatch: 'full' },
 ];
 

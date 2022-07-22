@@ -9,7 +9,19 @@ export class HttpService {
 
   constructor(private http: HttpClient) { }
 
-  getExperiencia(url: string) {
+  getData(url: string) {
     return this.http.get(url)
+  }
+
+  editData(url: string, object:any){
+    return this.http.post<any>(url, object).subscribe(data =>{
+      console.log(data, 'http service data')
+    })
+  }
+
+  deleteData(url:string){
+    return this.http.delete<any>(url).subscribe(data => {
+      console.log(data)
+    })
   }
 }

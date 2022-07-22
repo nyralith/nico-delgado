@@ -1,6 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Inject } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-
+import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { ExperienceComponent } from '../experience/experience.component';
 
 @Component({
   selector: 'app-edit-component',
@@ -11,13 +12,17 @@ export class EditComponentComponent implements OnInit {
   public editForm: FormGroup;
 
 
-  constructor(private fb: FormBuilder) {
+  constructor(
+    private fb: FormBuilder,
+    @Inject(MAT_DIALOG_DATA) public data: { id: any },
+    public dialogRef: MatDialogRef<ExperienceComponent>,
+  ) {
     {
       this.editForm = this.fb.group({
         trabajo: ['', Validators.required],
         titulo: ['', Validators.required],
         tiempo: ['', Validators.required],
-        descripcionAct: ['', Validators.required],
+        descripcion: ['', Validators.required],
       })
     }
   }
@@ -26,6 +31,8 @@ export class EditComponentComponent implements OnInit {
   }
 
   edit() {
-    console.log('alo')
+
+    console.log(this.data.id)
+    this.dialogRef.close(this.editForm.value)
   }
 }

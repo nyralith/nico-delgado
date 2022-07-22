@@ -20,7 +20,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { LoginService } from './services/login.service';
 import { EditComponentComponent } from './edit-component/edit-component.component';
 import { MainPageComponent } from './main-page/main-page.component';
-import {MatCard, MatCardModule} from '@angular/material/card';
+import { MatCardModule } from '@angular/material/card';
 import { HttpClientModule } from '@angular/common/http';
 import { HttpService } from './services/http.service';
 
