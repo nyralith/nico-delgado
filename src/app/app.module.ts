@@ -23,6 +23,14 @@ import { MainPageComponent } from './main-page/main-page.component';
 import { MatCardModule } from '@angular/material/card';
 import { HttpClientModule } from '@angular/common/http';
 import { HttpService } from './services/http.service';
+import { EditEducationComponent } from './edit-education/edit-education.component';
+import { EditSkillComponent } from './edit-skill/edit-skill.component';
+import { EditProyectComponent } from './edit-proyect/edit-proyect.component';
+import {MatIconModule} from '@angular/material/icon';
+import { EditAboutComponent } from './edit-about/edit-about.component';
+import {MatDividerModule} from '@angular/material/divider';
+import {MatStepperModule} from '@angular/material/stepper';
+import {MatTabsModule} from '@angular/material/tabs';
 
 @NgModule({
   declarations: [
@@ -35,7 +43,11 @@ import { HttpService } from './services/http.service';
     ProyectsComponent,
     LoginComponent,
     EditComponentComponent,
-    MainPageComponent
+    MainPageComponent,
+    EditEducationComponent,
+    EditSkillComponent,
+    EditProyectComponent,
+    EditAboutComponent
   ],
   imports: [
     BrowserModule,
@@ -48,7 +60,11 @@ import { HttpService } from './services/http.service';
     MatButtonModule,
     ReactiveFormsModule,
     MatCardModule,
-    HttpClientModule
+    HttpClientModule,
+    MatIconModule,
+    MatDividerModule,
+    MatStepperModule,
+    MatTabsModule
   ],
   providers: [LoginService, HttpService],
   bootstrap: [AppComponent]

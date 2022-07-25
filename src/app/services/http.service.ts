@@ -21,7 +21,7 @@ export class HttpService {
 
   deleteData(url:string){
     return this.http.delete<any>(url).subscribe(data => {
-      console.log(data)
+      console.log(data, 'delete data service')
     })
   }
 }

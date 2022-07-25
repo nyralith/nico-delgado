@@ -1,14 +1,26 @@
-<div class="container">
-    <div class="row">
-      <div class="col-sm">
-        <h1>Hey, I'm Nicolás</h1>
-        <p>I'm a FullStack Developer Jr. from Tucumán, Argentina
-          <br> I create custom websites to help businesess do better
-          online</p>
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-12 col-md-8">
+
+      <div *ngIf="isLogin" style="display: flex; justify-content:space-between">
+        <h1 >Hola, soy Nicolás</h1>
+
+        <span style="cursor: pointer;" (click)="openDialog()">
+          <mat-icon class="button-edit">edit</mat-icon>
+        </span>
       </div>
-      <div class="col-sm">
-        <img src="assets/kitten.jpg" alt="gatito" class="profileImg">
+
+      <h1 *ngIf="!isLogin">Hola, soy Nicolás</h1>
+      <div>
+        <p>{{about[0].descripcionUno}}</p>
       </div>
+      <div>
+        <p>{{about[0].descripcionDos}}</p>
+      </div>
+
     </div>
-  
+    <div class="col-12 col-md-4 ">
+      <img src="assets/kitten.jpg" alt="gatito" class="profileImg">
+    </div>
   </div>
+</div>

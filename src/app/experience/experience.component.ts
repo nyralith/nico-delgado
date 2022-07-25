@@ -4,26 +4,12 @@ import { HttpService } from '../services/http.service';
 import { MatDialog } from '@angular/material/dialog';
 import { EditComponentComponent } from '../edit-component/edit-component.component';
 
-export interface editExperience {
-  titulo: string;
-  trabajo: string;
-  tiempo: string;
-  descripcion: string;
-  id: number;
-}
-
-
 @Component({
   selector: 'app-experience',
   templateUrl: './experience.component.html',
   styleUrls: ['./experience.component.css']
 })
 export class ExperienceComponent implements OnInit {
-
-
-  experience: any = [];
-  isLogin: boolean = false;
-  editObject: editExperience;
 
   constructor(
     private loginSvc: LoginService,
@@ -37,6 +23,10 @@ export class ExperienceComponent implements OnInit {
     this.getAll()
   }
 
+  experience: any = [];
+  isLogin: boolean = false;
+  editObject: any;
+
   async getAll() {
     await this.httpSvc.getData('https://argentina-programa-api-2.herokuapp.com/experiencia/').subscribe(result => {
       this.experience = result
@@ -45,7 +35,6 @@ export class ExperienceComponent implements OnInit {
 
 
   openDialog(id: any): void {
-    console.log(id)
     const dialogRef = this.dialog.open(EditComponentComponent, {
       data: { id: id },
       width: '580px',
@@ -53,20 +42,37 @@ export class ExperienceComponent implements OnInit {
     });
     dialogRef.afterClosed().subscribe(result => {
       this.editObject = {
-          titulo: result.titulo,
-          tiempo: result.tiempo,
-          trabajo: result.trabajo,
-          descripcion: result.descripcion,
-          id: id
+        titulo: result.titulo,
+        tiempo: result.tiempo,
+        trabajo: result.trabajo,
+        descripcion: result.descripcion,
+        id: id
       }
 
       this.httpSvc.editData('https://argentina-programa-api-2.herokuapp.com/experiencia/', this.editObject)
       this.getAll()
-      console.log(this.editObject)
-      console.log('Terminamos')
     })
   }
-  deleteFunction(id: any){
+  deleteFunction(id: any) {
     this.httpSvc.deleteData(`https://argentina-programa-api-2.herokuapp.com/experiencia/${id}`)
+    this.getAll()
+  }
+
+  createExperience(){
+    const dialogRef = this.dialog.open(EditComponentComponent, {
+      width: '580px',
+      height: '550px'
+    });
+    dialogRef.afterClosed().subscribe(result => {
+      this.editObject = {
+        titulo: result.titulo,
+        tiempo: result.tiempo,
+        trabajo: result.trabajo,
+        descripcion: result.descripcion,
+      }
+
+      this.httpSvc.editData('https://argentina-programa-api-2.herokuapp.com/experiencia/', this.editObject)
+      this.getAll()
+    })
   }
 }

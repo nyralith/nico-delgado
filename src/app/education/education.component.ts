@@ -1,11 +1,10 @@
 import { Component, OnInit } from '@angular/core';
+import { HttpService } from '../services/http.service';
+import { EditComponentComponent } from '../edit-component/edit-component.component';
+import { MatDialog } from '@angular/material/dialog';
+import { LoginService } from '../services/login.service';
+import { EditEducationComponent } from '../edit-education/edit-education.component';
 
-export interface Educacion {
-  titulo: string,
-  tiempo: any,
-  institucion: string,
-  inicio: number,
-}
 
 @Component({
   selector: 'app-education',
@@ -14,19 +13,68 @@ export interface Educacion {
 })
 export class EducationComponent implements OnInit {
 
-  constructor() { }
-
-  ngOnInit(): void {
+  constructor(
+    private httpSvc: HttpService,
+    private loginSvc: LoginService,
+    public dialog: MatDialog
+  ) {
+    this.loginSvc.setEducacion(this)
   }
 
-  educacion: Educacion[] = [
-    {titulo: "FullStack web Developer", tiempo: "7 meses", institucion: "RollingCode School", inicio: 2020},
-    {titulo: "React Developer", tiempo: "2 meses", institucion: "Zero to Mastery Academy",  inicio: 2021},
-    {titulo: "Web Developer", tiempo: "7 meses", institucion: "Colt Steele Web Developer Bootcamp - Udemy",  inicio: 2019},
-    {titulo: "Fundamentos de la codificacion", tiempo: "1 semana", institucion: "Grasshopper",  inicio: 2021},
-    {titulo: "Fundamentos de la codificacion II", tiempo: "1 semana", institucion: "Grasshopper",  inicio: 2021},
-    {titulo: "Complete ReactJS Course - Basics to Advanced", tiempo: "1 mes", institucion: "Udemy",  inicio: 2021}
+  ngOnInit(): void {
+    this.getAll()
+  }
 
-   ]
+  educacion: any = []
+  editObject: any;
+  isLogin: boolean = false;
 
+
+  async getAll() {
+    await this.httpSvc.getData('https://argentina-programa-api-2.herokuapp.com/educacion').subscribe(result => {
+      this.educacion = result
+    })
+  }
+  openDialog(id: any): void {
+    const dialogRef = this.dialog.open(EditEducationComponent, {
+      data: { id: id },
+      width: '580px',
+      height: '550px'
+    });
+    dialogRef.afterClosed().subscribe(result => {
+      console.log(result, 'holapi')
+      this.editObject = {
+        titulo: result.titulo,
+        tiempo: result.tiempo,
+        institucion: result.institucion,
+        inicio: result.inicio,
+        id: id
+      }
+      console.log(this.editObject)
+      this.httpSvc.editData(`https://argentina-programa-api-2.herokuapp.com/educacion/`, this.editObject)
+      this.getAll()
+    })
+  }
+  deleteFunction(id: any) {
+    this.httpSvc.deleteData(`https://argentina-programa-api-2.herokuapp.com/educacion/${id}`)
+    this.getAll()
+  }
+
+  createEducation() {
+    const dialogRef = this.dialog.open(EditEducationComponent, {
+      width: '580px',
+      height: '550px'
+    });
+    dialogRef.afterClosed().subscribe(result => {
+      this.editObject = {
+        titulo: result.titulo,
+        tiempo: result.tiempo,
+        institucion: result.institucion,
+        inicio: result.inicio,
+      }
+
+      this.httpSvc.editData('https://argentina-programa-api-2.herokuapp.com/educacion/', this.editObject)
+      this.getAll()
+    })
+  }
 }

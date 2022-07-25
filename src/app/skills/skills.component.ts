@@ -1,4 +1,10 @@
 import { Component, OnInit } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
+import { HttpService } from '../services/http.service';
+import { EditComponentComponent } from '../edit-component/edit-component.component';
+import { LoginService } from '../services/login.service';
+import { MatIconModule } from '@angular/material/icon';
+import { EditSkillComponent } from '../edit-skill/edit-skill.component';
 
 
 export interface SkillValue {
@@ -15,25 +21,54 @@ export interface SkillValue {
 
 
 export class SkillsComponent implements OnInit {
-
-  constructor() { }
-
-  ngOnInit(): void {
+  constructor(private httpSvc: HttpService, public dialog: MatDialog, private loginService: LoginService) {
+    this.loginService.setSkill(this)
   }
-
-  habilidades: SkillValue[] = [
-    { skill: "Angular", valor: 80 },
-    { skill: "React", valor: 80 },
-    { skill: "JavaScript", valor: 85 },
-    { skill: "HTML", valor: 100 },
-    { skill: "CSS", valor: 90 },
-    { skill: "NodeJS", valor: 65 },
-    { skill: "ExpressJS", valor: 60 },
-    { skill: "CSS", valor: 90 },
-    { skill: "Java", valor: 15 },
-    { skill: "SpringBoot", valor: 15 },
-    { skill: "MongoDB", valor: 40 },
-    { skill: "MySQL", valor: 40 },
-
-  ]
+  ngOnInit(): void {
+    this.getAll()
+  }
+  habilidades: any = []
+  editObject: any;
+  isLogin: boolean = false;
+  async getAll() {
+    await this.httpSvc.getData('https://argentina-programa-api-2.herokuapp.com/skills').subscribe(result => {
+      this.habilidades = result
+    })
+  }
+  openDialog(id: any): void {
+    const dialogRef = this.dialog.open(EditSkillComponent, {
+      data: { id: id },
+      width: '580px',
+      height: '550px'
+    });
+    dialogRef.afterClosed().subscribe(result => {
+      console.log(result, 'skill')
+      this.editObject = {
+        skill: result.skill,
+        valor: result.valor,
+        id: id
+      }
+      this.httpSvc.editData('https://argentina-programa-api-2.herokuapp.com/skills', this.editObject)
+      this.getAll()
+    })
+  }
+  deleteFunction(id: any) {
+    this.httpSvc.deleteData(`https://argentina-programa-api-2.herokuapp.com/skills/${id}`)
+    this.getAll()
+  }
+  createSkill() {
+    const dialogRef = this.dialog.open(EditSkillComponent, {
+      width: '580px',
+      height: '550px'
+    });
+    dialogRef.afterClosed().subscribe(result => {
+      console.log(result, 'skill')
+      this.editObject = {
+        skill: result.skill,
+        valor: result.valor,
+      }
+      this.httpSvc.editData('https://argentina-programa-api-2.herokuapp.com/skills', this.editObject)
+      this.getAll()
+    })
+  }
 }

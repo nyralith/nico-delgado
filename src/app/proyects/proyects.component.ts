@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
+import { HttpService } from '../services/http.service';
+import { MatDialog } from '@angular/material/dialog';
+import { LoginService } from '../services/login.service';
+import { EditProyectComponent } from '../edit-proyect/edit-proyect.component';
 
-export interface Proyectos {
-  titulo: string,
-  descripcion: string,
-}
 
 @Component({
   selector: 'app-proyects',
@@ -11,17 +11,58 @@ export interface Proyectos {
   styleUrls: ['./proyects.component.css']
 })
 export class ProyectsComponent implements OnInit {
-
-  constructor() { }
-
+  constructor(private httpSvc: HttpService, public dialog: MatDialog, private loginSvc: LoginService) {
+    this.loginSvc.setProyect(this)
+  }
   ngOnInit(): void {
+    this.getAll()
+  }
+  proyectos: any = []
+  editObject: any;
+  isLogin: boolean = false
+
+  async getAll() {
+    await this.httpSvc.getData('https://argentina-programa-api-2.herokuapp.com/proyectos').subscribe(result => {
+      this.proyectos = result
+    })
   }
 
-  proyectos: Proyectos[] = [
-    { titulo: "Proyecto Rolling Travel", descripcion: "Lorem ipsum dolor sit, amet consectetur adipisicing elit. Quam, voluptatum repellat est reprehenderit quibusdam aperiam, placeat laudantium sapiente eligendi nihil voluptatibus ex deserunt facere vel, molestiae dolorum! Ipsum, sunt sequi." },
-    { titulo: "Proyecto Rolling BookStore", descripcion: "Lorem ipsum dolor sit, amet consectetur adipisicing elit. Quam, voluptatum repellat est reprehenderit quibusdam aperiam, placeat laudantium sapiente eligendi nihil voluptatibus ex deserunt facere vel, molestiae dolorum! Ipsum, sunt sequi." },
-    { titulo: "Proyecto Rolling GameStore", descripcion: "Lorem ipsum dolor sit, amet consectetur adipisicing elit. Quam, voluptatum repellat est reprehenderit quibusdam aperiam, placeat laudantium sapiente eligendi nihil voluptatibus ex deserunt facere vel, molestiae dolorum! Ipsum, sunt sequi." },
-    { titulo: "Proyecto ReactStore", descripcion: "Lorem ipsum dolor sit, amet consectetur adipisicing elit. Quam, voluptatum repellat est reprehenderit quibusdam aperiam, placeat laudantium sapiente eligendi nihil voluptatibus ex deserunt facere vel, molestiae dolorum! Ipsum, sunt sequi." },
 
-  ]
+  openDialog(id: any): void {
+    const dialogRef = this.dialog.open(EditProyectComponent, {
+      data: { id: id },
+      width: '580px',
+      height: '550px'
+    });
+    dialogRef.afterClosed().subscribe(result => {
+      this.editObject = {
+        titulo: result.titulo,
+        descripcion: result.descripcion,
+        id: id
+      }
+
+      this.httpSvc.editData('https://argentina-programa-api-2.herokuapp.com/proyectos', this.editObject)
+      this.getAll()
+    })
+  }
+  deleteFunction(id: any) {
+    this.httpSvc.deleteData(`https://argentina-programa-api-2.herokuapp.com/proyectos/${id}`)
+    this.getAll()
+  }
+
+  createProyecto() {
+    const dialogRef = this.dialog.open(EditProyectComponent, {
+      width: '580px',
+      height: '550px'
+    });
+    dialogRef.afterClosed().subscribe(result => {
+      this.editObject = {
+        titulo: result.titulo,
+        descripcion: result.descripcion,
+      }
+
+      this.httpSvc.editData('https://argentina-programa-api-2.herokuapp.com/proyectos', this.editObject)
+      this.getAll()
+    })
+  }
 }

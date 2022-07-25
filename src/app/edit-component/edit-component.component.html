@@ -2,7 +2,7 @@
 
   <div>
     <h1>Editar registro</h1>
-    <form [formGroup]='editForm' (ngSubmit)="edit()">
+    <form [formGroup]='editExpForm' (ngSubmit)="editExperiencia()">
       <mat-form-field class="example-full-width" appearance="fill">
         <mat-label>Ingrese trabajo</mat-label>
         <input matInput placeholder="Trabajo" formControlName="trabajo">
@@ -10,7 +10,7 @@
 
       <mat-form-field class="example-full-width" appearance="fill">
         <mat-label>Ingrese titulo</mat-label>
-        <input matInput placeholder="Titulo" (click)="edit()" formControlName="titulo">
+        <input matInput placeholder="Titulo" formControlName="titulo">
       </mat-form-field>
 
       <mat-form-field class="example-full-width" appearance="fill">
@@ -20,7 +20,7 @@
 
       <mat-form-field class="example-full-width" appearance="fill">
         <mat-label>Ingrese descripcion de actividad</mat-label>
-        <input matInput placeholder="Descripcion" formControlName="descripcion">
+        <input matInput placeholder="Descripcion de actividad" formControlName="descripcion">
       </mat-form-field>
 
       <button mat-raised-button color="primary">Editar</button>

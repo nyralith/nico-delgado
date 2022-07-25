@@ -1,9 +1,62 @@
 .profileImg {
-    max-width: 400px;
-    width: 100%;
-    height: auto;
-    border-radius: 15px;
-    padding: 35px;
-    background-color: rgba(0, 0, 0, 0.308);
+  max-width: 400px;
+  width: 100%;
+  height: auto;
+  border-radius: 15px;
+  padding: 15px;
+  background-color: rgba(0, 0, 0, 0.308);
+}
+
+.button-edit {
+  color: #37ff17;
+}
+
+.button-edit:hover {
+  color: #218512;
+}
+
+p {
+  font-size: 20px;
+  margin-bottom: 10px;
+}
+h1 {
+  color: #111;
+  font-family: "Helvetica Neue", sans-serif;
+  font-size: 175px;
+  font-weight: bold;
+  letter-spacing: -1px;
+  line-height: 1;
+  text-align: center;
+  background: -webkit-linear-gradient(
+    rgb(248, 188, 97),
+    rgb(134, 209, 231),
+    rgb(234, 116, 245)
+  );
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+p {
+  font-family: "Helvetica Neue", sans-serif;
+  font-size: 25px;
+  letter-spacing: -1px;
+  line-height: 1.2;
+}
+@media (max-width: 1200px) {
+  h1{
+    font-size: 130px;
   }
-  
+}
+@media (max-width: 1000px) {
+  h1{
+    font-size: 100px;
+  }
+}
+  @media (max-width: 450px) {
+    h1{
+      font-size: 50px;
+    }
+    p{
+      font-size: 16px;
+    }
+}

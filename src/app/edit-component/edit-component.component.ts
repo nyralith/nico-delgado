@@ -9,8 +9,7 @@ import { ExperienceComponent } from '../experience/experience.component';
   styleUrls: ['./edit-component.component.css']
 })
 export class EditComponentComponent implements OnInit {
-  public editForm: FormGroup;
-
+  public editExpForm: FormGroup;
 
   constructor(
     private fb: FormBuilder,
@@ -18,7 +17,7 @@ export class EditComponentComponent implements OnInit {
     public dialogRef: MatDialogRef<ExperienceComponent>,
   ) {
     {
-      this.editForm = this.fb.group({
+      this.editExpForm = this.fb.group({
         trabajo: ['', Validators.required],
         titulo: ['', Validators.required],
         tiempo: ['', Validators.required],
@@ -30,9 +29,7 @@ export class EditComponentComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  edit() {
-
-    console.log(this.data.id)
-    this.dialogRef.close(this.editForm.value)
+  editExperiencia() {
+    this.dialogRef.close(this.editExpForm.value)
   }
 }
