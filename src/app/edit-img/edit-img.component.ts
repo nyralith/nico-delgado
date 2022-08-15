@@ -30,7 +30,5 @@ export class EditImgComponent implements OnInit {
 
   editSkill() {
     this.dialogRef.close(this.editImgForm.value)
-    console.log(this.editImgForm.value)
   }
-
 }

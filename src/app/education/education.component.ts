@@ -42,7 +42,6 @@ export class EducationComponent implements OnInit {
       height: '550px'
     });
     dialogRef.afterClosed().subscribe(result => {
-      console.log(result, 'holapi')
       this.editObject = {
         titulo: result.titulo,
         tiempo: result.tiempo,
@@ -50,7 +49,6 @@ export class EducationComponent implements OnInit {
         inicio: result.inicio,
         id: id
       }
-      console.log(this.editObject)
       this.httpSvc.editData(`https://argentina-programa-api-2.herokuapp.com/educacion/`, this.editObject)
       this.getAll()
     })

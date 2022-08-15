@@ -15,13 +15,11 @@ export class HttpService {
 
   editData(url: string, object:any){
     return this.http.post<any>(url, object).subscribe(data =>{
-      console.log(data, 'http service data')
     })
   }
 
   deleteData(url:string){
     return this.http.delete<any>(url).subscribe(data => {
-      console.log(data, 'delete data service')
     })
   }
 }

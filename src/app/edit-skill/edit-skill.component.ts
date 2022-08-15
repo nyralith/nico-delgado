@@ -30,6 +30,5 @@
 
     editSkill() {
       this.dialogRef.close(this.editSkillForm.value)
-      console.log(this.editSkillForm.value)
     }
   }

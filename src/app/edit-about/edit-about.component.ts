@@ -30,7 +30,6 @@ export class EditAboutComponent implements OnInit {
 
   editSkill() {
     this.dialogRef.close(this.editAboutForm.value)
-    console.log(this.editAboutForm.value)
   }
 
 }

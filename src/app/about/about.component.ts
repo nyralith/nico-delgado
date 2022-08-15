@@ -72,7 +72,6 @@ export class AboutComponent implements OnInit {
   async getImgUrl() {
     this.httpSvc.getData('https://argentina-programa-api-2.herokuapp.com/img/1').subscribe(result => {
       this.imgUrl = result;
-      console.log(this.imgUrl)
     })
   }
 }

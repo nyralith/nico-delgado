@@ -42,7 +42,6 @@ export class SkillsComponent implements OnInit {
       height: '550px'
     });
     dialogRef.afterClosed().subscribe(result => {
-      console.log(result, 'skill')
       this.editObject = {
         skill: result.skill,
         valor: result.valor,
@@ -62,7 +61,6 @@ export class SkillsComponent implements OnInit {
       height: '550px'
     });
     dialogRef.afterClosed().subscribe(result => {
-      console.log(result, 'skill')
       this.editObject = {
         skill: result.skill,
         valor: result.valor,
