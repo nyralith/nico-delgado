@@ -1,9 +1,9 @@
-<div *ngIf="!isLogin" class="container">
+<div *ngIf="!isLogin" class="container-fluid">
     <h1>Skills</h1>
 
 </div>
 
-<div *ngIf="isLogin" class="container">
+<div *ngIf="isLogin" class="container-fluid">
         <div style="display:flex; justify-content: space-between;">
             <h1>Skills</h1>
             <span style="cursor: pointer;" (click)="createSkill()">
@@ -12,7 +12,7 @@
         </div>
 </div>
 
-<div *ngIf="!isLogin" class="container skillCircles">
+<div *ngIf="!isLogin" class="container-fluid skillCircles">
 
     <div *ngFor="let item of habilidades" class="skillStyles">
         <mat-spinner mode="determinate" value="{{item.valor}}" color="accent" style="margin:0 auto"></mat-spinner>
@@ -20,7 +20,7 @@
     </div>
 </div>
 
-<div *ngIf="isLogin" class="container skillCircles">
+<div *ngIf="isLogin" class="container-fluid skillCircles">
     <div *ngFor="let item of habilidades" class="skillStyles">
         <mat-spinner mode="determinate" value="{{item.valor}}" color="accent" style="margin:0 auto"></mat-spinner>
         <p>{{item.skill}} <span style="cursor: pointer;" (click)="openDialog(habilidades.id)">

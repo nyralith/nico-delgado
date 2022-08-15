@@ -31,6 +31,7 @@ import { EditAboutComponent } from './edit-about/edit-about.component';
 import {MatDividerModule} from '@angular/material/divider';
 import {MatStepperModule} from '@angular/material/stepper';
 import {MatTabsModule} from '@angular/material/tabs';
+import { EditImgComponent } from './edit-img/edit-img.component';
 
 @NgModule({
   declarations: [
@@ -47,7 +48,8 @@ import {MatTabsModule} from '@angular/material/tabs';
     EditEducationComponent,
     EditSkillComponent,
     EditProyectComponent,
-    EditAboutComponent
+    EditAboutComponent,
+    EditImgComponent
   ],
   imports: [
     BrowserModule,

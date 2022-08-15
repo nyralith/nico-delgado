@@ -1,20 +1,23 @@
-    <div *ngIf="!isLogin" class="container">
-        <h1>Proyectos</h1>
-        <div *ngFor="let proyecto of proyectos">
+<div *ngIf="!isLogin" class="container-fluid">
+    <h1>Proyectos</h1>
+    <mat-card *ngFor="let proyecto of proyectos" class="test mt-2 mb-2">
+        <div>
             <h2>{{proyecto.titulo}}</h2>
             <p>{{proyecto.descripcion}}</p>
             <button mat-raised-button color="accent">Ver Proyecto</button>
         </div>
-    </div>
+    </mat-card>
+</div>
 
-    <div *ngIf="isLogin" class="container">
-        <div style="display:flex; justify-content: space-between;">
-            <h1>Proyectos</h1>
-            <span style="cursor: pointer;" (click)="createProyecto()">
-                <mat-icon class="button-create">add_circle</mat-icon>
-            </span>
-            </div>
-        <div *ngFor="let proyecto of proyectos">
+<div *ngIf="isLogin" class="container-fluid">
+    <div style="display:flex; justify-content: space-between;">
+        <h1>Proyectos</h1>
+        <span style="cursor: pointer;" (click)="createProyecto()">
+            <mat-icon class="button-create">add_circle</mat-icon>
+        </span>
+    </div>
+    <mat-card *ngFor="let proyecto of proyectos" class="test mt-2 mb-2">
+        <div>
             <div style="display:flex; justify-content: space-between;">
                 <h2>{{proyecto.titulo}}</h2>
                 <div>
@@ -30,4 +33,5 @@
             <p>{{proyecto.descripcion}}</p>
             <button mat-raised-button color="accent">Ver Proyecto</button>
         </div>
-    </div>
+    </mat-card>
+</div>

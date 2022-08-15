@@ -5,3 +5,7 @@
 .mat-step-label{
     color: white !important;
 }
+
+::ng-deep .mat-step-text-label{
+     color: white;
+}

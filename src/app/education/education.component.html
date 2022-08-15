@@ -1,41 +1,47 @@
-<div *ngIf="!isLogin" class="container">
+<div *ngIf="!isLogin" class="container-fluid">
     <h1>Educacion</h1>
-    <div *ngFor="let edu of educacion">
-        <ul>
-            <li>
-                <h1>{{edu.titulo}}</h1>
-            </li>
-            <p>La duración del cursado fue de: {{edu.tiempo}}</p>
-            <p>El cursado se realizó en: {{edu.institucion}} en el año {{edu.inicio}}</p>
-        </ul>
-    </div>
+    <mat-card *ngFor="let edu of educacion" class="test mt-2 mb-2">
+        <div>
+            <h2>{{edu.titulo}}</h2>
+            <ul>
+                <li>
+                    <p>La duración del cursado fue de: {{edu.tiempo}}</p>
+                </li>
+                <li>
+                    <p>El cursado se realizó en: {{edu.institucion}} en el año {{edu.inicio}}</p>
+                </li>
+            </ul>
+        </div>
+    </mat-card>
 </div>
 
-<div *ngIf="isLogin" class="container">
+<div *ngIf="isLogin" class="container-fluid">
     <div style="display:flex; justify-content: space-between;">
         <h1>Educacion</h1>
         <span style="cursor: pointer;" (click)="createEducation()">
             <mat-icon class="button-create">add_circle</mat-icon>
         </span>
     </div>
-    <div *ngFor="let edu of educacion">
-        <div style="display:flex; justify-content: space-between;">
-            <ul>
-                <li>
-                    <h1>{{edu.titulo}}</h1>
-                </li>
-            </ul>
+    <mat-card *ngFor="let edu of educacion" class="test mt-2 mb-2">
+        <div>
             <div>
-                <span style="cursor: pointer;" (click)="openDialog(edu.id)">
-                    <mat-icon class="button-edit">edit</mat-icon>
-                </span>
-                <span style="cursor: pointer;" (click)="deleteFunction(edu.id)">
-                    <mat-icon class="button-delete">delete</mat-icon>
-                </span>
+                <h2>{{edu.titulo}}</h2>
+                <ul>
+                    <li>
+                        <p>La duración del cursado fue de: {{edu.tiempo}}</p>
+                    </li>
+                    <li>
+                        <p>El cursado se realizó en: {{edu.institucion}} en el año {{edu.inicio}}</p>
+                    </li>
+                </ul>
+                <div align="end">
+                    <span style="cursor: pointer;" (click)="openDialog(edu.id)">
+                        <mat-icon class="button-edit">edit</mat-icon>
+                    </span>
+                    <span style="cursor: pointer;" (click)="deleteFunction(edu.id)">
+                        <mat-icon class="button-delete">delete</mat-icon>
+                    </span>
+                </div>
             </div>
         </div>
-        <p>La duración del cursado fue de: {{edu.tiempo}}</p>
-        <p>El cursado se realizó en: {{edu.institucion}} en el año {{edu.inicio}}</p>
-
-    </div>
-</div>
+    </mat-card>

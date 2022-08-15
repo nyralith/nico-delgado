@@ -61,3 +61,9 @@ p{
   letter-spacing: -1px;
   line-height: 1;
 }
+
+.test{
+  border-radius: 20px;
+  padding: 10px;
+  box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px;
+}

@@ -1,6 +1,7 @@
 import { Component, Inject, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { LoginComponent } from '../login/login.component';
+import { LoginService } from '../services/login.service';
 
 
 @Component({
@@ -13,7 +14,7 @@ export class NavbarComponent implements OnInit {
   userName: string = 'admin';
   logPassword: string = 'admin';
 
-  constructor(public dialog: MatDialog) { }
+  constructor(public dialog: MatDialog, private loginSvc: LoginService) { }
 
   ngOnInit(): void {
   }
@@ -21,8 +22,10 @@ export class NavbarComponent implements OnInit {
 
   openDialog(): void {
     const dialogRef = this.dialog.open(LoginComponent, {
+      disableClose: true,
       width: '580px',
       height: '350px'
+      
     });
 
     dialogRef.afterClosed().subscribe(result => {
@@ -32,6 +35,14 @@ export class NavbarComponent implements OnInit {
     })
   }
 
+  signOut(){
+    this.isLogin = false
+    this.loginSvc.addLoginExperiencia()
+    this.loginSvc.addLoginEducacion()
+    this.loginSvc.addLoginSkill()
+    this.loginSvc.addLoginProyect()
+    this.loginSvc.addLoginAbout()
+  }
  
 
 }

@@ -23,7 +23,7 @@ export class LoginService {
   }
 
   addLoginExperiencia() {
-    this.experienceComponent.isLogin = true
+    this.experienceComponent.isLogin = !this.experienceComponent.isLogin
   }
 
   setEducacion(educacionComponent: EducationComponent) {
@@ -31,7 +31,7 @@ export class LoginService {
   }
 
   addLoginEducacion() {
-    this.educacionComponent.isLogin = true
+    this.educacionComponent.isLogin = !this.educacionComponent.isLogin
   }
 
   setSkill(skillComponent: SkillsComponent) {
@@ -39,7 +39,7 @@ export class LoginService {
   }
 
   addLoginSkill(){
-    this.skillComponent.isLogin = true
+    this.skillComponent.isLogin = !this.skillComponent.isLogin
   }
 
   setProyect(proyectComponent: ProyectsComponent){
@@ -47,7 +47,7 @@ export class LoginService {
   }
 
   addLoginProyect(){
-    this.proyectComponent.isLogin = true
+    this.proyectComponent.isLogin = !this.proyectComponent.isLogin 
   }
 
   setAbout(aboutComponent: AboutComponent){
@@ -55,6 +55,6 @@ export class LoginService {
   }
 
   addLoginAbout(){
-    this.aboutComponent.isLogin = true
+    this.aboutComponent.isLogin = !this.aboutComponent.isLogin
   }
 }

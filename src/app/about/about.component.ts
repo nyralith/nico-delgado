@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { EditAboutComponent } from '../edit-about/edit-about.component';
+import { EditImgComponent } from '../edit-img/edit-img.component';
 import { HttpService } from '../services/http.service';
 import { LoginService } from '../services/login.service';
 
@@ -22,8 +23,10 @@ export class AboutComponent implements OnInit {
   about: any = [];
   editObject: any;
   isDataHere: boolean = false;
+  imgUrl: any;
 
   ngOnInit(): void {
+    this.getImgUrl()
     this.getAll()
   }
 
@@ -48,6 +51,28 @@ export class AboutComponent implements OnInit {
 
       this.httpSvc.editData('https://argentina-programa-api-2.herokuapp.com/about/', this.editObject)
       this.getAll()
+    })
+  }
+
+  openDialogImg(): void {
+    const dialogRef = this.dialog.open(EditImgComponent, {
+      width: '580px',
+      height: '280px'
+    });
+    dialogRef.afterClosed().subscribe(result => {
+      this.editObject = {
+        id: 1,
+        imgUrl: result.img,
+      }
+      this.httpSvc.editData('https://argentina-programa-api-2.herokuapp.com/img/', this.editObject)
+      this.getImgUrl()
+    })
+  }
+
+  async getImgUrl() {
+    this.httpSvc.getData('https://argentina-programa-api-2.herokuapp.com/img/1').subscribe(result => {
+      this.imgUrl = result;
+      console.log(this.imgUrl)
     })
   }
 }
