@@ -2,6 +2,7 @@ import { Component, Inject, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { NavbarComponent } from '../navbar/navbar.component';
+import { HttpService } from '../services/http.service';
 import { LoginService } from '../services/login.service';
 
 @Component({
@@ -11,16 +12,14 @@ import { LoginService } from '../services/login.service';
 })
 export class LoginComponent implements OnInit {
 
-
-
   public loginForm: FormGroup;
+  userData: any;
 
-  user: string = 'admin';
-  logPassword: string = 'admin';
 
   constructor(public dialogRef: MatDialogRef<NavbarComponent>,
     @Inject(MAT_DIALOG_DATA) public data: { user: string, password: string },
     private loginSvc: LoginService,
+    private httpSvc: HttpService,
     private fb: FormBuilder
 
   ) {
@@ -31,12 +30,13 @@ export class LoginComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.getUsers()
   }
 
   continueLogin() {
     sessionStorage.setItem('username', this.loginForm.value.username)
     sessionStorage.setItem('password', this.loginForm.value.password)
-    if (sessionStorage.getItem('username') === this.user && sessionStorage.getItem('password') === this.logPassword) {
+    if (sessionStorage.getItem('username') === this.userData.user && sessionStorage.getItem('password') === this.userData.password) {
       this.dialogRef.close(this.loginForm.value)
       this.loginSvc.addLoginExperiencia()
       this.loginSvc.addLoginEducacion()
@@ -44,15 +44,20 @@ export class LoginComponent implements OnInit {
       this.loginSvc.addLoginProyect()
       this.loginSvc.addLoginAbout()
       return 'Login Correcto'
-    }else{
+    } else {
       return 'Login incorrecto'
     }
-
   }
 
   closeModal() {
     this.loginForm.reset();
     this.dialogRef.close(this.loginForm.value)
+  }
+
+  getUsers(){
+    this.httpSvc.getData('https://argentina-programa-api-2.herokuapp.com/login/1').subscribe(result => {
+      this.userData = result
+    })
   }
 
 }

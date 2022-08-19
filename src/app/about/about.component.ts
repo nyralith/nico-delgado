@@ -26,11 +26,11 @@ export class AboutComponent implements OnInit {
   imgUrl: any;
 
   ngOnInit(): void {
-    this.getImgUrl()
     this.getAll()
   }
 
   async getAll() {
+   await this.getImgUrl()
     await this.httpSvc.getData('https://argentina-programa-api-2.herokuapp.com/about').subscribe(result => {
       this.about = result
       this.isDataHere = true
